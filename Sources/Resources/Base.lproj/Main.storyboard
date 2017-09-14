@@ -1,28 +1,108 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13189.4" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YF2-8x-qfO">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13165.3"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Navigation Controller-->
+        <scene sceneID="LYZ-bK-KtM">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="TinkoffNews_TestWork" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                <navigationController id="YF2-8x-qfO" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="C9A-v8-uNr">
+                        <rect key="frame" x="0.0" y="20" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Eam-3B-h5h" kind="relationship" relationship="rootViewController" id="zNq-Qf-V1p"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nTY-6o-q60" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1268" y="34"/>
+        </scene>
+        <!--News Feed View Controller-->
+        <scene sceneID="amE-zh-Rhw">
+            <objects>
+                <tableViewController storyboardIdentifier="NewsFeedViewController" id="Eam-3B-h5h" customClass="NewsFeedViewController" customModule="TinkoffNews_TestWork" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="bNU-BF-M86">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsFeedCell" id="oCC-UB-zW9" customClass="NewsFeedCell" customModule="TinkoffNews_TestWork" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="320" height="70"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oCC-UB-zW9" id="BYC-ee-Qte">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="69.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="В задании этого не требовалось" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D6F-8f-4Rf">
+                                            <rect key="frame" x="8" y="8" width="304" height="14"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Считать Высоту ячейки из кода лень. пускай будут тормоза :)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dYd-RH-Bre">
+                                            <rect key="frame" x="8" y="24" width="304" height="33.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="dYd-RH-Bre" firstAttribute="top" secondItem="D6F-8f-4Rf" secondAttribute="bottom" constant="2" id="4LZ-VP-nXT"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="dYd-RH-Bre" secondAttribute="bottom" constant="4" id="4qu-XV-fRn"/>
+                                        <constraint firstItem="D6F-8f-4Rf" firstAttribute="top" secondItem="BYC-ee-Qte" secondAttribute="topMargin" id="57i-wX-ioL"/>
+                                        <constraint firstItem="dYd-RH-Bre" firstAttribute="leading" secondItem="BYC-ee-Qte" secondAttribute="leadingMargin" id="AGq-HG-c6u"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="D6F-8f-4Rf" secondAttribute="trailing" id="TuZ-Ci-9Yh"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="dYd-RH-Bre" secondAttribute="trailing" id="nhV-Yl-XkS"/>
+                                        <constraint firstItem="D6F-8f-4Rf" firstAttribute="leading" secondItem="BYC-ee-Qte" secondAttribute="leadingMargin" id="v7X-fY-k64"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="dateLbl" destination="D6F-8f-4Rf" id="nNi-3D-5HJ"/>
+                                    <outlet property="textLbl" destination="dYd-RH-Bre" id="0rh-FH-70e"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Eam-3B-h5h" id="RRI-lW-xGj"/>
+                            <outlet property="delegate" destination="Eam-3B-h5h" id="RC1-Nw-61p"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="oGi-8p-AFA"/>
+                    <refreshControl key="refreshControl" opaque="NO" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" id="DFM-cW-M1B">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <connections>
+                            <action selector="refresh:" destination="Eam-3B-h5h" eventType="valueChanged" id="KrO-7v-haL"/>
+                        </connections>
+                    </refreshControl>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6v4-gd-yyI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-500.625" y="33.75"/>
+        </scene>
+        <!--News Detals View Controller-->
+        <scene sceneID="eMY-Qh-P48">
+            <objects>
+                <viewController id="UlA-1c-DVa" customClass="NewsDetalsViewController" customModule="TinkoffNews_TestWork" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4TY-OZ-gJ2">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="cDG-6u-Dq7"/>
                     </view>
                 </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RVa-EJ-BUS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="204" y="34"/>
         </scene>
     </scenes>
 </document>
