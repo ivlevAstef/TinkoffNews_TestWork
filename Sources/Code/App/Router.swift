@@ -15,7 +15,7 @@ final class Router {
   }
   
   func inject(into vc: NewsFeedViewController) {
-    vc.dataProvider = MockNewsFeedDataProvider()
+    vc.dataProvider = NewsFeedInteractor()
     vc.notificationController = NotificationController(rootViewController: vc)
   }
   

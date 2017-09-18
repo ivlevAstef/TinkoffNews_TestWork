@@ -20,6 +20,8 @@
 		D57F85E01F62F9D500331E14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D57F85D61F62F9D500331E14 /* LaunchScreen.storyboard */; };
 		D57F85E11F62F9D500331E14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D57F85D81F62F9D500331E14 /* Main.storyboard */; };
 		D57F85E31F62F9D500331E14 /* TinkoffNews_TestWork.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D57F85DB1F62F9D500331E14 /* TinkoffNews_TestWork.xcdatamodeld */; };
+		D5E49C1F1F70322C006E6435 /* TinkoffRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E49C1E1F70322C006E6435 /* TinkoffRequest.swift */; };
+		D5E49C211F703E61006E6435 /* Extensions+String.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5E49C201F703E61006E6435 /* Extensions+String.swift */; };
 		D5F6CC9B1F6AE4B100AB2240 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F6CC9A1F6AE4B100AB2240 /* Logger.swift */; };
 		D5F6CCA01F6AECF000AB2240 /* MockNewsFeedDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5F6CC9F1F6AECF000AB2240 /* MockNewsFeedDataProvider.swift */; };
 /* End PBXBuildFile section */
@@ -40,6 +42,8 @@
 		D57F85DC1F62F9D500331E14 /* TinkoffNews_TestWork.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TinkoffNews_TestWork.xcdatamodel; sourceTree = "<group>"; };
 		D57F85E41F62F9ED00331E14 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D5BB71961F62F7BA00AD6A97 /* TinkoffNews_TestWork.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TinkoffNews_TestWork.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5E49C1E1F70322C006E6435 /* TinkoffRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TinkoffRequest.swift; sourceTree = "<group>"; };
+		D5E49C201F703E61006E6435 /* Extensions+String.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extensions+String.swift"; sourceTree = "<group>"; };
 		D5F6CC9A1F6AE4B100AB2240 /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		D5F6CC9F1F6AECF000AB2240 /* MockNewsFeedDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MockNewsFeedDataProvider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -80,6 +84,7 @@
 				D547941A1F6AE1C40050FC05 /* NotificationController.swift */,
 				D547941C1F6AE20F0050FC05 /* Localization.swift */,
 				D5F6CC9A1F6AE4B100AB2240 /* Logger.swift */,
+				D5E49C201F703E61006E6435 /* Extensions+String.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -109,6 +114,7 @@
 				D547941E1F6AE2390050FC05 /* App */,
 				D547940B1F6AD7CF0050FC05 /* NewsFeed */,
 				D547940C1F6AD7CF0050FC05 /* NewsDetails */,
+				D5E49C1D1F70320E006E6435 /* Core */,
 				D54794191F6AE18E0050FC05 /* Utility */,
 				D5F6CC9E1F6AECF000AB2240 /* Mocks */,
 			);
@@ -140,6 +146,14 @@
 				D5BB71961F62F7BA00AD6A97 /* TinkoffNews_TestWork.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		D5E49C1D1F70320E006E6435 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D5E49C1E1F70322C006E6435 /* TinkoffRequest.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		D5F6CC9E1F6AECF000AB2240 /* Mocks */ = {
@@ -222,6 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5E49C211F703E61006E6435 /* Extensions+String.swift in Sources */,
 				D54794101F6AD7E70050FC05 /* NewsDetailsViewController.swift in Sources */,
 				D5F6CCA01F6AECF000AB2240 /* MockNewsFeedDataProvider.swift in Sources */,
 				D5F6CC9B1F6AE4B100AB2240 /* Logger.swift in Sources */,
@@ -231,6 +246,7 @@
 				D54794211F6AE23A0050FC05 /* AppDelegate.swift in Sources */,
 				D57F85E31F62F9D500331E14 /* TinkoffNews_TestWork.xcdatamodeld in Sources */,
 				D547941D1F6AE20F0050FC05 /* Localization.swift in Sources */,
+				D5E49C1F1F70322C006E6435 /* TinkoffRequest.swift in Sources */,
 				D54794161F6ADD090050FC05 /* NewsFeedInteractor.swift in Sources */,
 				D547940E1F6AD7DA0050FC05 /* NewsFeedViewController.swift in Sources */,
 				D54794181F6ADD970050FC05 /* ShortSqueezeOfNews.swift in Sources */,

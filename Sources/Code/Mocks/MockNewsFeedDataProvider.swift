@@ -12,7 +12,7 @@ final class MockNewsFeedDataProvider: NewsFeedDataProvider {
   func fetchNews() throws -> [ShortSqueezeOfNews] {
     return (0..<768).map{ index in
       return ShortSqueezeOfNews(
-        id: index,
+        id: "\(index)",
         text: "Какой то там текст от банков \(index)",
         publicationDate: Date()
       )

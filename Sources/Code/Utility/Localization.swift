@@ -21,6 +21,11 @@ struct Localization {
         return "\(noLoadNewsFeed) На сервере ведутся технические работы, попробуйте повторить загрузку позже."
       }
       
+      static var notOk: String {
+        return "\(noLoadNewsFeed) Попробуйте повторить загрузку позже."
+      }
+      
+      
       static var undefined: String {
         return noLoadNewsFeed
       }

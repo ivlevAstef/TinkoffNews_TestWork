@@ -9,8 +9,10 @@
 import UIKit
 
 enum NewsFeedError: Error {
+  case unknown
   case noInternet
   case invalidData
+  case notOk
 }
 
 protocol NewsFeedDataProvider {
@@ -58,13 +60,17 @@ extension NewsFeedViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    return tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.IDENTIFIER, for: indexPath)
-  }
-  
-  override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    let cell = (tableView.dequeueReusableCell(withIdentifier: NewsFeedCell.IDENTIFIER, for: indexPath) as! NewsFeedCell)
+    
     /// слегка не безопасный код, но я гарантирую, что не будет падать :)
     let news = newsList[indexPath.row]
-    (cell as! NewsFeedCell).setup(date: news.publicationDate, text: news.text)
+    cell.setup(date: news.publicationDate, text: news.text)
+    
+    return cell
+  }
+  
+  /// Еслибы я не использовал UITableViewAutomaticDimension то надо было код настройки писать тут :)
+  override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
   }
 }
 
@@ -86,6 +92,7 @@ extension NewsFeedViewController {
   
   private func showNews(_ newsList: [ShortSqueezeOfNews]) {
     DispatchQueue.main.async {
+      /// тут особо крутые ребята пишут диффер, и на основании диффа анимации. Но так как использовать ничего нельзя, а написать такой код это задача на месяц, то тут крутых спец эффектов не будет :)
       self.newsList = newsList
       self.tableView.reloadData()
     }
@@ -98,6 +105,8 @@ extension NewsFeedViewController {
       errorOfString = Localization.NewsFeed.Error.noInternet
     case NewsFeedError.invalidData:
       errorOfString = Localization.NewsFeed.Error.invalidData
+    case NewsFeedError.notOk:
+      errorOfString = Localization.NewsFeed.Error.notOk
     default:
       errorOfString = Localization.NewsFeed.Error.undefined
     }
