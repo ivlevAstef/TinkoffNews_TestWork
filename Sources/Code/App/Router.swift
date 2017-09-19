@@ -9,17 +9,19 @@
 import UIKit
 
 final class Router {
-  static let shared: Router = Router()
+  static let shared = Router()
   
-  init() {
-  }
+  private let dbController: DBController = DBControllerImpl()
+  
+  private init() {}
   
   func inject(into vc: NewsFeedViewController) {
-    vc.dataProvider = NewsFeedInteractor()
+    vc.dataProvider = NewsFeedInteractor(dbController: dbController)
     vc.notificationController = NotificationController(rootViewController: vc)
   }
   
   func inject(into vc: NewsDetalsViewController) {
-    
+    vc.dataProvider = NewsDetailsInteractor(dbController: dbController)
+    vc.notificationController = NotificationController(rootViewController: vc)
   }
 }

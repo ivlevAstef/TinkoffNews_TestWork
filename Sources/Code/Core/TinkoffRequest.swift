@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum TinkoffRequestError: Error {
+  case noInternet
+  case invalidData
+  case notOk
+}
+
 /// Лень она такая... ну короче не буду я тут протоколы городить.
 final class TinkoffRequest {
   private static let address = "https://api.tinkoff.ru"
@@ -49,6 +55,22 @@ final class TinkoffRequest {
     }
     
     return result
+  }
+  
+  func apiCall() throws -> [String: Any] {
+    guard let optres = try? self.call(), let result = optres else {
+      throw TinkoffRequestError.noInternet // упростим жизнь... не буду разбираться, что именно пошло не так
+    }
+    
+    guard let json: [String: Any] = (try? JSONSerialization.jsonObject(with: result, options: [])) as? [String : Any] else {
+      throw TinkoffRequestError.invalidData
+    }
+    
+    guard let resultCode = json["resultCode"] as? String, resultCode == "OK" else {
+      throw TinkoffRequestError.notOk
+    }
+    
+    return json
   }
   
   private static func makeAddress(get method: String, with params: [String: Any]) -> String {

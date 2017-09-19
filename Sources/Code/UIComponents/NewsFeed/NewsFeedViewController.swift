@@ -9,17 +9,19 @@
 import UIKit
 
 enum NewsFeedError: Error {
-  case unknown
-  case noInternet
-  case invalidData
-  case notOk
+  case emptyResult
 }
 
 protocol NewsFeedDataProvider {
-  /// returns all news, or throw error.
+  /// download all news, or throw error
+  ///
+  /// - Throws: NewsFeedError.*
+  func downloadNews() throws
+  
+  /// returns all news from DB, or throw error.
   ///
   /// - Returns: all news
-  /// - Throws: NewsFeedError*
+  /// - Throws: CoreData errors
   func fetchNews() throws -> [ShortSqueezeOfNews]
 }
 
@@ -72,6 +74,20 @@ extension NewsFeedViewController {
   /// Еслибы я не использовал UITableViewAutomaticDimension то надо было код настройки писать тут :)
   override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
   }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let newsId = newsList[indexPath.row].id
+    
+    // А кто говорил, что sender-а можно использовать только как отправителя :D
+    performSegue(withIdentifier: "showNewsDetails", sender: newsId)
+  }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if let detailsViewController = segue.destination as? NewsDetalsViewController,
+       let newsId = sender as? NewsID {
+      detailsViewController.postInit(newsId)
+    }
+  }
 }
 
 
@@ -82,10 +98,16 @@ extension NewsFeedViewController {
     DispatchQueue.global(qos: .utility).async {
       defer { DispatchQueue.main.async { self.refreshControl?.endRefreshing() } }
       do {
+        try self.dataProvider.downloadNews()
+      } catch {
+        self.showError(error)
+      }
+      
+      do {
         let newsList = try self.dataProvider.fetchNews()
         self.showNews(newsList)
       } catch {
-        self.showError(error)
+        log(level: .error, msg: "db error: \(error)")
       }
     }
   }
@@ -98,20 +120,26 @@ extension NewsFeedViewController {
     }
   }
   
+  /// Полный механизм обработки ошибок писать долго
+  /// поэтому забьем на то, что часть общих ошибок будет дублироваться - пускай будет фишкой :D
   private func showError(_ error: Error) {
+    log(level: .error, msg: "show error: \(error)")
+    
     let errorOfString: String
     switch error {
-    case NewsFeedError.noInternet:
-      errorOfString = Localization.NewsFeed.Error.noInternet
-    case NewsFeedError.invalidData:
-      errorOfString = Localization.NewsFeed.Error.invalidData
-    case NewsFeedError.notOk:
-      errorOfString = Localization.NewsFeed.Error.notOk
+    case (is TinkoffRequestError):
+      errorOfString = Localization.NewsFeed.Error.noLoadNewsFeed +
+        Localization.TinkoffRequest.Error.localize(error: error as! TinkoffRequestError)
+      
+    case NewsFeedError.emptyResult:
+      // ну эту ошибку можно и по другому обработать - вставить экран заглушку
+      errorOfString = Localization.NewsFeed.Error.emptyResult
     default:
-      errorOfString = Localization.NewsFeed.Error.undefined
+      errorOfString = Localization.NewsFeed.Error.noLoadNewsFeed
     }
     
-    DispatchQueue.main.async {
+    /// быстрое решение, чтобы обеспечить возврат refreshControl... на удивление, пользоваться так удобней даже
+    DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
       self.notificationController.showError(text: errorOfString)
     }
   }

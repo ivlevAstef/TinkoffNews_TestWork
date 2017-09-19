@@ -7,27 +7,53 @@
 //
 
 struct Localization {
-  struct NewsFeed {
+  struct TinkoffRequest {
     struct Error {
-      private static var noLoadNewsFeed: String {
-        return "Не удалось загрузить ленту новостей."
-      }
-      
       static var noInternet: String {
-        return "\(noLoadNewsFeed) Проверьте соединение с интернетом."
+        return "Проверьте соединение с интернетом."
       }
       
       static var invalidData: String {
-        return "\(noLoadNewsFeed) На сервере ведутся технические работы, попробуйте повторить загрузку позже."
+        return "На сервере ведутся технические работы, попробуйте повторить загрузку позже."
       }
       
       static var notOk: String {
-        return "\(noLoadNewsFeed) Попробуйте повторить загрузку позже."
+        return "Попробуйте повторить загрузку позже."
       }
       
+      static func localize(error: TinkoffRequestError) -> String {
+        switch error {
+        case .noInternet:
+          return Localization.TinkoffRequest.Error.noInternet
+        case .invalidData:
+          return Localization.TinkoffRequest.Error.invalidData
+        case .notOk:
+          return Localization.TinkoffRequest.Error.notOk
+        }
+      }
+    }
+  }
+  
+  struct NewsFeed {
+    struct Error {
+      static var noLoadNewsFeed: String {
+        return "Не удалось загрузить ленту новостей."
+      }
       
-      static var undefined: String {
-        return noLoadNewsFeed
+      static var emptyResult: String {
+        return "Упс... А новостей то нету."
+      }
+    }
+  }
+  
+  struct NewsDetails {
+    struct Error {
+      static var noLoadNewsDetails: String {
+        return "Не удалось загрузить новость."
+      }
+      
+      static var notFoundNews: String {
+        return "Упс... А новости то нету. Возможно она была удалена."
       }
     }
   }

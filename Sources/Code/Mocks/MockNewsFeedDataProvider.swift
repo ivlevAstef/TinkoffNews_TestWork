@@ -9,6 +9,10 @@
 import Foundation
 
 final class MockNewsFeedDataProvider: NewsFeedDataProvider {
+  func downloadNews() throws {
+    
+  }
+  
   func fetchNews() throws -> [ShortSqueezeOfNews] {
     return (0..<768).map{ index in
       return ShortSqueezeOfNews(
